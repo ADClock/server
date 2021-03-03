@@ -26,8 +26,13 @@ jobs:
       - name: Install node modules
         working-directory: ./src-frontend
         run: npm install
+        
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+        
       - name: Build with Gradle
-        run: gradle -Pversion="${{ github.ref }}" build
+        run: gradle -Pversion="${{ steps.get_version.outputs.VERSION }}" build
         env:
           USERNAME: ${{ github.actor }}
           TOKEN: ${{ secrets.PACKAGE_TOKEN }}
