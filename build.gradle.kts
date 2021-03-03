@@ -38,11 +38,12 @@ sourceSets["test"].resources.srcDirs("testresources")
 
 val fatJar = task("fatJar", type = Jar::class) {
     manifest {
-        attributes["Implementation-Title"] = "Doppelkopf Server - Fat"
+        attributes["Implementation-Title"] = "ADClock Server - Fat"
         attributes["Implementation-Version"] = project.version
         attributes["Main-Class"] = "io.ktor.server.netty.EngineMain"
     }
     from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
+    from(sourceSets["main"].resources)
     with(tasks.jar.get() as CopySpec)
     archiveFileName.set("server.jar")
 }
@@ -56,6 +57,7 @@ val npmBuild = task<Exec>("npmBuild") {
 }
 
 val copyDistFolder = tasks.register<Copy>("copyDistFolder") {
+    delete("resources/dist")
     from(file("src-frontend/dist"))
     into(file("resources/dist"))
 }
@@ -117,9 +119,9 @@ tasks {
         }
     }
     "fatJar" {
-        // TODO dependsOn(copyDistFolder)
+        dependsOn(copyDistFolder)
     }
     "copyDistFolder" {
-        dependsOn(npmBuild)
+        // TODO dependsOn(npmBuild)
     }
 }

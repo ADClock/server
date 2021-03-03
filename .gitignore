@@ -3,6 +3,7 @@
 /out
 /build
 /bundle
+/resources/dist
 *.iml
 *.ipr
 *.iws
