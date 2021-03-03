@@ -1,3 +1,4 @@
+val version: String by project
 val ktor_version: String by project
 val kotlin_version: String by project
 val logback_version: String by project
@@ -8,7 +9,6 @@ plugins {
 }
 
 group = "com.adclock"
-version = "0.0.1"
 
 application {
     mainClassName = "io.ktor.server.netty.EngineMain"
