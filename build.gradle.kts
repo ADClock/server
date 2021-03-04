@@ -1,7 +1,10 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 val version: String by project
 val ktor_version: String by project
 val kotlin_version: String by project
 val logback_version: String by project
+val pi4j_version: String by project
 
 plugins {
     application
@@ -27,6 +30,9 @@ dependencies {
     implementation("io.ktor:ktor-server-core:$ktor_version")
     implementation("io.ktor:ktor-server-host-common:$ktor_version")
     implementation("io.ktor:ktor-gson:$ktor_version")
+
+    implementation("com.pi4j:pi4j-core:$pi4j_version")
+
     testImplementation("io.ktor:ktor-server-tests:$ktor_version")
 }
 
