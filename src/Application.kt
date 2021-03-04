@@ -2,14 +2,14 @@ package com.adclock
 
 import com.adclock.routes.version
 import io.ktor.application.*
-import io.ktor.response.*
-import io.ktor.request.*
-import io.ktor.routing.*
-import io.ktor.http.content.*
 import io.ktor.features.*
-import org.slf4j.event.*
-import io.ktor.server.engine.*
 import io.ktor.gson.*
+import io.ktor.http.content.*
+import io.ktor.request.*
+import io.ktor.response.*
+import io.ktor.routing.*
+import io.ktor.server.engine.*
+import org.slf4j.event.Level
 import java.text.DateFormat
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)

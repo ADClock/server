@@ -9,9 +9,9 @@ import java.time.LocalDateTime
 import java.time.ZoneId
 
 fun Route.version(config: ApplicationConfig) {
-    val version = config.propertyOrNull("version")?.getString()?:"version property not found in application.conf"
+    val version = config.propertyOrNull("version")?.getString() ?: "version property not found in application.conf"
     val compileTimestamp = LocalDateTime.ofInstant(
-        Instant.ofEpochMilli(config.propertyOrNull("timestamp")?.getString()?.toLong()?:0),
+        Instant.ofEpochMilli(config.propertyOrNull("timestamp")?.getString()?.toLong() ?: 0),
         ZoneId.systemDefault()
     ).toString()
     val startupTimestamp = LocalDateTime.now().toString()
