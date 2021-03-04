@@ -1,6 +1,9 @@
 package com.adclock
 
+import com.adclock.model.ClockWall
+import com.adclock.routes.clock
 import com.adclock.routes.version
+import com.adclock.services.ClockService
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.gson.*
@@ -9,6 +12,9 @@ import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
 import io.ktor.server.engine.*
+import org.koin.ktor.ext.Koin
+import org.koin.ktor.ext.get
+import org.koin.ktor.ext.inject
 import org.slf4j.event.Level
 import java.text.DateFormat
 
@@ -34,6 +40,15 @@ fun Application.module(testing: Boolean = false) {
         }
     }
 
+    val apiConfig = environment.config.config("adclock.api")
+
+    install(Koin) {
+        modules(org.koin.dsl.module {
+            single { ClockWall(8, 3) }
+            single { ClockService(get()) }
+        })
+    }
+
     routing {
 
         when {
@@ -53,9 +68,8 @@ fun Application.module(testing: Boolean = false) {
             resources("assets")
         }
 
-        val apiConfig = environment.config.config("adclock.api")
         route("api") {
-
+            clock(get())
             version(apiConfig)
         }
 
