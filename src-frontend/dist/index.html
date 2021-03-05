@@ -13,26 +13,57 @@ Es scheint, als würde das Frontend funktionieren. Auch das Backend scheint irge
 </div>
 <div id="versionData"></div>
 
+<div>
+    Press here to shutdown the service. It might come back:
+    <button onclick="shutdown()">Shutdown server</button>
+</div>
+
+<div id="clockData"></div>
+
+
 <script>
     fetch('api/version')
         .then(function (response) {
             return response.json();
         })
         .then(function (data) {
-            appendData(data);
+            appendVersionData(data);
         })
         .catch(function (err) {
             console.log('error: ' + err);
         });
 
-    function appendData(data) {
+
+    fetch('api/version')
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            appendClockData(data);
+        })
+        .catch(function (err) {
+            console.log('error: ' + err);
+        });
+
+    function appendVersionData(data) {
         var mainContainer = document.getElementById("versionData");
         var div = document.createElement("div");
         div.innerHTML = '<p>Current version: ' + data.version + '</p>' +
             '<p>Startup time: ' + data.startup + '</p>' +
             '<p>Current time: ' + data.current + '</p>';
         mainContainer.appendChild(div);
+    }
 
+    function appendClockData(data) {
+        var mainContainer = document.getElementById("clockData");
+        var div = document.createElement("div");
+        div.innerHTML = 'ADClock: ' + data;
+        mainContainer.appendChild(div);
+    }
+
+    function shutdown() {
+        fetch('api/shutdown');
+        setTimeout(() => { location.reload() }, 5000);
     }
 </script>
 </body>

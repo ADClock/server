@@ -3,7 +3,9 @@ package com.adclock
 import com.adclock.model.ClockWall
 import com.adclock.routes.clock
 import com.adclock.routes.version
-import com.adclock.services.ClockService
+import com.adclock.services.ClockInteractionService
+import com.adclock.services.HandInteractionService
+import com.adclock.services.WallInteractionService
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.gson.*
@@ -14,7 +16,6 @@ import io.ktor.routing.*
 import io.ktor.server.engine.*
 import org.koin.ktor.ext.Koin
 import org.koin.ktor.ext.get
-import org.koin.ktor.ext.inject
 import org.slf4j.event.Level
 import java.text.DateFormat
 
@@ -45,7 +46,9 @@ fun Application.module(testing: Boolean = false) {
     install(Koin) {
         modules(org.koin.dsl.module {
             single { ClockWall(8, 3) }
-            single { ClockService(get()) }
+            single { HandInteractionService() }
+            single { ClockInteractionService(get()) }
+            single { WallInteractionService(get(), get()) }
         })
     }
 
