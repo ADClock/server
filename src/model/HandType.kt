@@ -1,5 +1,5 @@
 package com.adclock.model
 
-enum class HandType {
-    HOUR, MINUTE;
+enum class HandType(short: String) {
+    HOUR("H"), MINUTE("M");
 }
