@@ -11,13 +11,13 @@ Our goal is it, to make this code runnable on every maschine - even without an c
 
 
 ## ADClock command set
-The specification is written in EBNF notation (http://www.cl.cam.ac.uk/~mgk25/iso-14977.pdf[ISO 14977]).
+The specification is written in EBNF notation following [ISO 14977](http://www.cl.cam.ac.uk/~mgk25/iso-14977.pdf).
 
 ```
-command  = (clockcommand | scenecommand);
-handselection = clockselection, [ "H" ], [ "M" ], { ",", handselection };
+command         = (clockcommand | scenecommand);
+handselection   = clockselection, [ "H" ], [ "M" ], { ",", handselection };
 clockselection  = ( "." | clock | clock, "-", clock );
-clock = 1..24
+clock           = 1..24
 ```
 
 A clockcommand is used to mutate one or multiple hands. When either `H` or `M` is given in `handselection` then both hands of given `clockselection` are selected. 
