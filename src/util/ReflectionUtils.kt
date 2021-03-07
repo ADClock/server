@@ -1,23 +1,16 @@
 package com.adclock.util
 
-import com.sun.javaws.Launcher
 import java.io.File
-import java.net.URL
 import kotlin.reflect.KClass
 import kotlin.reflect.full.isSubclassOf
 
 // Modified from https://stackoverflow.com/questions/42401781/how-to-find-all-classes-in-a-package-using-reflection-in-kotlin
 fun findSubclasses(packagename: String, superClass: KClass<*>): List<KClass<*>> {
     // Translate the package name into an absolute path
-    var name = packagename
-    if (!name.startsWith("/")) {
-        name = "/$name"
-    }
-    name = name.replace('.', '/')
+    val absolute = ".$packagename".replace(Regex("\\.+"), "/")
 
     // Get a File object for the package
-    val url: URL =
-        Launcher::class.java.getResource(name) ?: throw IllegalArgumentException("Package $packagename not found.")
+    val url = superClass.java.getResource(absolute) ?: throw IllegalArgumentException("Package $packagename not found.")
     val directory = File(url.file)
 
     val foundClasses = mutableListOf<KClass<*>>()
@@ -33,9 +26,9 @@ fun findSubclasses(packagename: String, superClass: KClass<*>): List<KClass<*>> 
                             .replace('/', '.')
                 try {
                     // Try to create an instance of the object
-                    val kotlinClass = Class.forName(fullyQualifiedClassName).kotlin
-                    if (kotlinClass.isSubclassOf(superClass))
-                        foundClasses += kotlinClass
+                    val possibleClass = Class.forName(fullyQualifiedClassName).kotlin
+                    if (possibleClass.isSubclassOf(superClass))
+                        foundClasses += possibleClass
                 } catch (cnfex: ClassNotFoundException) {
                     System.err.println(cnfex)
                 } catch (iex: InstantiationException) {
