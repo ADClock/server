@@ -1,4 +1,4 @@
-name: ADClock Server Release CI
+name: Release Server
 
 # Controls when the action will run. 
 on:
