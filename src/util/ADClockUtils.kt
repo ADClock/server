@@ -1,7 +1,9 @@
 package com.adclock.util
 
+import com.adclock.model.Clock
 import com.adclock.model.Direction
 import com.adclock.model.Movement
+import com.adclock.instructionset.clockselections.ClockSelection
 
 const val MAX_STEPS = 1705
 
@@ -13,9 +15,8 @@ fun Direction.step(position: Int): Int {
     }
 }
 
-fun Movement.validate() {
-    require(position >= 0) { "Position $position invalid. Must be >= 0" }
-    require(position < MAX_STEPS) { "Position $position invalid. Must be < $MAX_STEPS" }
+fun Direction.move(position: Int, steps: Int) =
+    (position + (if (this == Direction.FORWARD) steps else -steps) % MAX_STEPS + MAX_STEPS) % MAX_STEPS
 
-    require(waitSteps >= 0) { "WaitSteps $waitSteps invalid. Must be >= 0"  }
-}
+fun Array<Clock>.filter(selection: List<ClockSelection>) = filter { c -> selection.any { it.selected(c) } }
+
