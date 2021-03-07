@@ -5,7 +5,8 @@ data class Clock(val id: Int, val posX: Int, val posY: Int) {
     val minute = Hand()
 
     fun init() {
-        TODO("Not yet implemented")
+        hour.init()
+        minute.init()
     }
 
     fun updateTarget() {

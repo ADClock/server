@@ -20,4 +20,9 @@ class Hand {
         target = planned.copy()
         current.waitSteps = target.waitSteps
     }
+
+    fun init() {
+        current.clearPosition()
+        current.waitSteps = 0
+    }
 }
