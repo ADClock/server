@@ -23,8 +23,8 @@ clock           = 1..24
 A clockcommand is used to mutate one or multiple hands. When either `H` or `M` is given in `handselection` then both hands of given `clockselection` are selected. 
 
 ```
-clockcommand   = (SET | SPD | DIR | DLY | COL | CAL | RST);
-SET            = "SET", handselection, (1..1714);
+clockcommand   = (POS | SPD | DIR | DLY | COL | CAL | RST);
+POS            = "SET", handselection, (1..1714);
 SPD            = "SPD", handselection, (1..5);
 DIR            = "DIR", handselection, ("F" | "B");
 DLY            = "DLY", handselection, (1..);
