@@ -1,3 +1,7 @@
+[![Latest Release](https://img.shields.io/github/v/release/adclock/server.svg)](https://github.com/ADClock/server/releases)
+[![Release ADClock Server](https://github.com/ADClock/server/actions/workflows/release.yml/badge.svg)](https://github.com/ADClock/server/actions/workflows/release.yml)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ADClock_server&metric=alert_status)](https://sonarcloud.io/dashboard?id=ADClock_server)
+
 # ADClock server
 This project is the master for a ClockWall. It allows you to play with the clock wall as you want.
 
