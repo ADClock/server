@@ -83,6 +83,7 @@ jobs:
         
         # Build Changelog by PRs
       - name: "Build Changelog"
+        id: build_changelog
         uses: mikepenz/release-changelog-builder-action@v1
         with:
           configuration: ".github/release-changelog-configuration.jsonn"
@@ -98,7 +99,7 @@ jobs:
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
-          body: ${{steps.github_release.outputs.changelog}}
+          body: ${{steps.build_changelog.outputs.changelog}}
           draft: false
           prerelease: false
           
