@@ -3,16 +3,8 @@ name: Test ADClock Server
 # Controls when the action will run. 
 on: 
   push:
-    paths-ignore:
-      - .github/**
-      - README.md
-      - .gitignore
     tags-ignore:
       - v*
-      
-  pull_request:
-    branches:
-      - main
 
   workflow_dispatch:
 
