@@ -21,10 +21,12 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
+          
       - name: Set up Node.js 14.15.1
         uses: actions/setup-node@v1
         with:
           node-version: 14.15.1
+          
       - name: Install node modules
         working-directory: ./src-frontend
         run: npm install
@@ -57,6 +59,7 @@ jobs:
           
       - name: Check bundle
         run: ls ./bundle -l
+        
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
@@ -74,8 +77,17 @@ jobs:
         with:
           name: server-artifact
           path: ./bundle
+          
       - name: Check bundle
         run: ls ./bundle -l
+        
+        # Build Changelog by PRs
+      - name: "Build Changelog"
+        uses: mikepenz/release-changelog-builder-action@{latest-release}
+        with:
+          configuration: ".github/release-changelog-configuration.jsonn"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
         # Create and publish Release
       - name: Create Release
@@ -86,8 +98,10 @@ jobs:
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
+          body: ${{steps.github_release.outputs.changelog}}
           draft: false
           prerelease: false
+          
       - name: Upload Release Asset
         id: upload-release-asset 
         uses: actions/upload-release-asset@v1
