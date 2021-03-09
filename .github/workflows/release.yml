@@ -86,7 +86,7 @@ jobs:
         id: build_changelog
         uses: mikepenz/release-changelog-builder-action@v1
         with:
-          configuration: ".github/release-changelog-configuration.jsonn"
+          configuration: ".github/release-changelog-configuration.json"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
