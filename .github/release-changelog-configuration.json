@@ -18,11 +18,12 @@
       }
     ],
     "ignore_labels": [
-      "ignore"
+      "ignore",
+      "github_actions"
     ],
     "sort": "ASC",
     "template": "${{CHANGELOG}}\n\n<details>\n<summary>Uncategorized</summary>\n\n${{UNCATEGORIZED}}\n</details>",
-    "pr_template": "- ${{TITLE}} (#${{NUMBER}})",
+    "pr_template": "- ${{TITLE}} (PR #${{NUMBER}})",
     "empty_template": "- no changes",
     "label_extractor": [
       {
@@ -44,9 +45,6 @@
     "max_tags_to_fetch": 200,
     "max_pull_requests": 200,
     "max_back_track_time_days": 365,
-    "exclude_merge_branches": [
-      "Owner/qa"
-    ],
     "tag_resolver": {
       "method": "semver"
     }
