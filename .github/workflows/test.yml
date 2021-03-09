@@ -3,9 +3,16 @@ name: Test ADClock Server
 # Controls when the action will run. 
 on: 
   push:
+    paths-ignore:
+      - .github/**
+      - README.md
+      - .gitignore
+    tags-ignore:
+      - v*
+
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+# Runs all tests
 jobs:
   test:
     runs-on: ubuntu-latest
