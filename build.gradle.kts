@@ -132,4 +132,10 @@ tasks {
     "copyDistFolder" {
         // TODO dependsOn(npmBuild)
     }
+
+    compileKotlin {
+        kotlinOptions {
+                freeCompilerArgs = freeCompilerArgs + "-Xopt-in=kotlin.RequiresOptIn" // Opt-in option for Koin annotation of KoinComponent.
+        }
+    }
 }

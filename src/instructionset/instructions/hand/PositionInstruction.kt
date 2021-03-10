@@ -4,17 +4,23 @@ import com.adclock.instructionset.clockselections.ClockSelection
 import com.adclock.instructionset.instructions.clock.ClockInstructionParser
 import com.adclock.model.Hand
 import com.adclock.services.HandInteractionService
+import org.koin.core.component.KoinApiExtension
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 class PositionInstruction(
     selection: List<ClockSelection>,
     val position: Int,
     val relative: Boolean = false
 ) : HandInstruction(selection) {
-    override fun apply(handService: HandInteractionService, hand: Hand) {
+    override fun apply(hand: Hand) {
         handService.setPlannedPosition(hand, position, relative)
     }
 
-    companion object : ClockInstructionParser<PositionInstruction> {
+    @OptIn(KoinApiExtension::class)
+    companion object : ClockInstructionParser<PositionInstruction>, KoinComponent {
+        val handService: HandInteractionService by inject()
+
         override val key: String
             get() = "POS"
 

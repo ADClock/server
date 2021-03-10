@@ -3,11 +3,11 @@ package com.adclock.instructionset.instructions.basic
 import com.adclock.instructionset.Task
 import com.adclock.instructionset.instructions.Instruction
 import com.adclock.instructionset.instructions.InstructionParser
-import com.adclock.services.WallInteractionService
+import com.adclock.model.ClockWall
 
 class RepeatInstruction : Instruction {
 
-    override fun apply(task: Task, wallService: WallInteractionService): Boolean {
+    override fun apply(task: Task, wall: ClockWall): Boolean {
         task.restart()
         return false
     }

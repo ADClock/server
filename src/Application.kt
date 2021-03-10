@@ -48,7 +48,7 @@ fun Application.module(testing: Boolean = false) {
             single { ClockWall(8, 3) }
             single { HandInteractionService() }
             single { ClockInteractionService(get()) }
-            single { WallInteractionService(get(), get()) }
+            single { WallInteractionService(get()) }
         })
     }
 
@@ -72,7 +72,7 @@ fun Application.module(testing: Boolean = false) {
         }
 
         route("api") {
-            clock(get())
+            clock(get(), get())
             version(apiConfig)
         }
 
