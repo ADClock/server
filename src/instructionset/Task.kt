@@ -4,7 +4,7 @@ import com.adclock.instructionset.instructions.Instruction
 import com.adclock.model.ClockWall
 import com.adclock.services.WallInteractionService
 
-data class Task(val name: String, val instructions: List<Instruction>) {
+data class Task(val name: String, val instructions: MutableList<Instruction> = mutableListOf()) {
     private var current: Int = 0
     var sleepUntil: Long = 0
         internal set
