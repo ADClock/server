@@ -8,20 +8,20 @@ class TaskServiceTest {
 
     @Test
     fun shouldReturnEmptyTaskNameList() {
-        val service = TaskService()
+        val service = TaskService(TaskStorageService())
         assertEquals(emptyList(), service.getTaskNameList(), "Task list")
     }
 
     @Test
     fun shouldReturnOneTaskNameList() {
-        val service = TaskService()
+        val service = TaskService(TaskStorageService())
         service.createTask("Foo")
         assertEquals(listOf("Foo"), service.getTaskNameList(), "Task list")
     }
 
     @Test
     fun addTaskWithNoInstructions() {
-        val service = TaskService()
+        val service = TaskService(TaskStorageService())
         service.createTask("Foo")
         val task = service.getTask("Foo")
         assertEquals("Foo", task.name, "Task name")
@@ -31,7 +31,7 @@ class TaskServiceTest {
 
     @Test
     fun addTaskWithSingleInstruction() {
-        val service = TaskService()
+        val service = TaskService(TaskStorageService())
         service.createTask("Simple", listOf("RUN"))
         val task = service.getTask("Simple")
         assertEquals(1, task.instructions.size, "Task instructions list size")
