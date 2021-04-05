@@ -1,5 +1,6 @@
 package com.adclock.instructionset.instructions.basic
 
+import com.adclock.instructionset.Executor
 import com.adclock.instructionset.Task
 import com.adclock.instructionset.instructions.Instruction
 import com.adclock.instructionset.instructions.InstructionParser
@@ -7,9 +8,9 @@ import com.adclock.model.ClockWall
 
 class RepeatInstruction : Instruction {
 
-    override fun apply(task: Task, wall: ClockWall): Boolean {
-        task.restart()
-        return false
+    override fun apply(executor: Executor, wall: ClockWall): Boolean {
+        executor.restartTask()
+        return false // because program pointer already set with restartTask()
     }
 
 

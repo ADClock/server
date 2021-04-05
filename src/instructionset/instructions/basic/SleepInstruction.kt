@@ -1,14 +1,14 @@
 package com.adclock.instructionset.instructions.basic
 
-import com.adclock.instructionset.Task
+import com.adclock.instructionset.Executor
 import com.adclock.instructionset.instructions.Instruction
 import com.adclock.instructionset.instructions.InstructionParser
 import com.adclock.model.ClockWall
 
-class SleepInstruction(val sleep: Int) : Instruction {
+class SleepInstruction(val sleepSeconds: Int) : Instruction {
 
-    override fun apply(task: Task, wall: ClockWall): Boolean {
-        task.sleepUntil = System.currentTimeMillis() + sleep * 1000
+    override fun apply(executor: Executor, wall: ClockWall): Boolean {
+        executor.delay(sleepSeconds)
         return true
     }
 
@@ -21,7 +21,7 @@ class SleepInstruction(val sleep: Int) : Instruction {
             return SleepInstruction(input.toInt())
         }
 
-        override fun serialize(instruction: SleepInstruction) = instruction.sleep.toString()
+        override fun serialize(instruction: SleepInstruction) = instruction.sleepSeconds.toString()
     }
 
 }
