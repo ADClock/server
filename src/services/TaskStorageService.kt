@@ -7,7 +7,7 @@ import com.adclock.util.createOrEmptyFile
 import com.adclock.util.readLinesIndexed
 import java.io.File
 
-class TaskStorageService {
+class TaskStorageService(private val taskFolder: File) {
 
     fun loadTask(name: String): Task {
         val file = getTaskFile(name)
@@ -45,20 +45,14 @@ class TaskStorageService {
 
     fun exists(name: String) = getTaskFile(name).exists()
 
-    fun taskNames(): Array<String> = TASK_FOLDER.list { _, name -> name.endsWith(FILE_EXTENSION) }
+    fun taskNames(): Array<String> = taskFolder.list { _, name -> name.endsWith(FILE_EXTENSION) }
         ?: throw IllegalStateException("Error loading task names.")
 
 
-    private fun getTaskFile(name: String) = File(TASK_FOLDER, "$name$FILE_EXTENSION")
+    private fun getTaskFile(name: String) = File(taskFolder, "$name$FILE_EXTENSION")
 
     companion object {
-        private val TASK_FOLDER = File("tasks/")
         private const val FILE_EXTENSION = ".adc"
-
-        init {
-            if (!TASK_FOLDER.exists())
-                TASK_FOLDER.mkdirs()
-        }
     }
 
 }
