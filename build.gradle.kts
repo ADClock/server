@@ -36,6 +36,7 @@ dependencies {
     implementation("com.pi4j:pi4j-core:$pi4j_version")
 
     testImplementation("io.ktor:ktor-server-tests:$ktor_version")
+    testImplementation("org.koin:koin-test:$koin_version")
 }
 
 kotlin.sourceSets["main"].kotlin.srcDirs("src")
