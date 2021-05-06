@@ -10,8 +10,12 @@ updates:
     schedule:
       interval: "daily"
       time: "02:00"
+    assignees:
+      - "V3lop5"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "daily"
       time: "02:00"
+    assignees:
+      - "V3lop5"
