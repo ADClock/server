@@ -7,7 +7,7 @@ val pi4j_version: String by project
 
 plugins {
     application
-    kotlin("jvm") version "1.5.31"
+    kotlin("jvm") version "1.6.0"
 }
 
 group = "com.adclock"
